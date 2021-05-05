@@ -1,4 +1,4 @@
-package jeason.a线性表.a数组;
+package jeason.a线性表.a动态数组;
 
 public class Person {
 	private int age;

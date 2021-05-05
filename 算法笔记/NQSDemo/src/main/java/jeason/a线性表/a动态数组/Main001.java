@@ -1,26 +1,29 @@
-package jeason.a线性表.a数组;
+package jeason.a线性表.a动态数组;
 
 
-public class AppOfArrayList {
+public class Main001 {
 
 	public static void run() {
+
+		// java.util.ArrayList;
+
+
 		ArrayList<Object> list  = new ArrayList<>();
 		list.add(10);
 		list.add(new Person(10, "Jack"));
 		list.add(22);
-		
 		list.indexOf(new Person(10, "Jack"));
-		
-		System.out.println(list);
-//		ArrayList<Object> persons  = new ArrayList<>();
-//		persons.add(new Person(10, "Jack"));
-//		persons.add(null);
-//		persons.add(new Person(15, "Rose"));
-//		persons.add(null);
-//		persons.add(new Person(12, "James"));
-//		persons.add(null);
-//
-//		System.out.println(persons.indexOf(null));
+		System.out.println("打印的数组：" + list);
+
+
+		ArrayList<Object> persons  = new ArrayList<>();
+		persons.add(new Person(10, "Jack"));
+		persons.add(null);
+		persons.add(new Person(15, "Rose"));
+		persons.add(null);
+		persons.add(new Person(12, "James"));
+		persons.add(null);
+		System.out.println("找到的下标：" + persons.indexOf(null));
 	}
 
 	static void test() {

@@ -1,19 +1,17 @@
-package jeason.a线性表.a数组;
+package jeason.a线性表.a动态数组;
 
 @SuppressWarnings("unchecked")
 public class ArrayList<E> {
-	/**
-	 * 元素的数量
-	 */
+	//元素的数量
 	private int size;
-	/**
-	 * 所有的元素
-	 */
+	//所有的元素
 	private E[] elements;
 	
+	//默认数组分配内存空间
 	private static final int DEFAULT_CAPACITY = 10;
 	private static final int ELEMENT_NOT_FOUND = -1;
 	
+
 	public ArrayList(int capaticy) {
 		capaticy = (capaticy < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capaticy;
 		elements = (E[]) new Object[capaticy];
@@ -23,9 +21,7 @@ public class ArrayList<E> {
 		this(DEFAULT_CAPACITY);
 	}
 	
-	/**
-	 * 清除所有元素
-	 */
+	/** 清除所有元素 */
 	public void clear() {
 		for (int i = 0; i < size; i++) {
 			elements[i] = null;
@@ -33,55 +29,33 @@ public class ArrayList<E> {
 		size = 0;
 	}
 
-	/**
-	 * 元素的数量
-	 * @return
-	 */
+	/** 元素的数量 */
 	public int size() {
 		return size;
 	}
 
-	/**
-	 * 是否为空
-	 * @return
-	 */
+	/** 是否为空 */
 	public boolean isEmpty() {
-		 return size == 0;
+		return size == 0;
 	}
 
-	/**
-	 * 是否包含某个元素
-	 * @param element
-	 * @return
-	 */
+	/** 是否包含某个元素 */
 	public boolean contains(E element) {
 		return indexOf(element) != ELEMENT_NOT_FOUND;
 	}
 
-	/**
-	 * 添加元素到尾部
-	 * @param element
-	 */
+	/** 添加元素到尾部 */
 	public void add(E element) {
 		add(size, element);
 	}
 
-	/**
-	 * 获取index位置的元素
-	 * @param index
-	 * @return
-	 */
+	/** 获取index位置的元素 */
 	public E get(int index) {
 		rangeCheck(index);
 		return elements[index];
 	}
 
-	/**
-	 * 设置index位置的元素
-	 * @param index
-	 * @param element
-	 * @return 原来的元素ֵ
-	 */
+	/** 设置index位置的元素 */
 	public E set(int index, E element) {
 		rangeCheck(index);
 		
@@ -90,11 +64,7 @@ public class ArrayList<E> {
 		return old;
 	}
 
-	/**
-	 * 在index位置插入一个元素
-	 * @param index
-	 * @param element
-	 */
+	/** 在index位置插入一个元素 */
 	public void add(int index, E element) {
 		rangeCheckForAdd(index);
 		
@@ -107,11 +77,7 @@ public class ArrayList<E> {
 		size++;
 	}
 
-	/**
-	 * 删除index位置的元素
-	 * @param index
-	 * @return
-	 */
+	/** 删除index位置的元素 */
 	public E remove(int index) {
 		rangeCheck(index);
 		
@@ -119,15 +85,12 @@ public class ArrayList<E> {
 		for (int i = index + 1; i < size; i++) {
 			elements[i - 1] = elements[i];
 		}
+		//最后一个元素置null，不然指针没释放，指针指向的内存地址也没释放
 		elements[--size] = null;
 		return old;
 	}
 
-	/**
-	 * 查看元素的索引
-	 * @param element
-	 * @return
-	 */
+	/** 查看元素的索引 */
 	public int indexOf(E element) {
 		if (element == null) {  // 1
 			for (int i = 0; i < size; i++) {
@@ -135,27 +98,15 @@ public class ArrayList<E> {
 			}
 		} else {
 			for (int i = 0; i < size; i++) {
+				//java里面equals是比较内存地址是否相同
 				if (element.equals(elements[i])) return i; // n
 			}
 		}
 		return ELEMENT_NOT_FOUND;
 	}
+
 	
-//	public int indexOf2(E element) {
-//		for (int i = 0; i < size; i++) {
-//			if (valEquals(element, elements[i])) return i; // 2n
-//		}
-//		return ELEMENT_NOT_FOUND;
-//	}
-//	
-//	private boolean valEquals(Object v1, Object v2) {
-//		return v1 == null ? v2 == null : v1.equals(v2);
-//	}
-	
-	/**
-	 * 保证要有capacity的容量
-	 * @param capacity
-	 */
+	/** 保证要有capacity的容量 */
 	private void ensureCapacity(int capacity) {
 		int oldCapacity = elements.length;
 		if (oldCapacity >= capacity) return;
@@ -170,17 +121,18 @@ public class ArrayList<E> {
 		
 		System.out.println(oldCapacity + "扩容为" + newCapacity);
 	}
-	
+	//打印抛出异常
 	private void outOfBounds(int index) {
 		throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
 	}
 	
+	//监测index是否越界
 	private void rangeCheck(int index) {
 		if (index < 0 || index >= size) {
 			outOfBounds(index);
 		}
 	}
-	
+	//监测index是否越界
 	private void rangeCheckForAdd(int index) {
 		if (index < 0 || index > size) {
 			outOfBounds(index);
@@ -199,9 +151,6 @@ public class ArrayList<E> {
 			
 			string.append(elements[i]);
 			
-//			if (i != size - 1) {
-//				string.append(", ");
-//			}
 		}
 		string.append("]");
 		return string.toString();
