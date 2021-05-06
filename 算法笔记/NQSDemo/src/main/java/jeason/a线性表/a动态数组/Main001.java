@@ -3,9 +3,13 @@ package jeason.a线性表.a动态数组;
 
 public class Main001 {
 
-	public static void run() {
+	public static void run(boolean execute) {
 
-		// java.util.ArrayList;
+		if (!execute) {
+			return;
+		}
+
+				// java.util.ArrayList;
 
 
 		ArrayList<Object> list  = new ArrayList<>();

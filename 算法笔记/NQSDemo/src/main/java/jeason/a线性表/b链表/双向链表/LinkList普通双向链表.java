@@ -1,16 +1,17 @@
-package jeason.a线性表.b链表.单向链表;
+package jeason.a线性表.b链表.双向链表;
 import jeason.a线性表.b链表.common.AbstractList;
 
 
 //继承抽象父类，实现声明的方法
-public class LinkList普通链表<E> extends AbstractList<E> {
+public class LinkList普通双向链表<E> extends AbstractList<E> {
 	private Node<E> first;
 	private Node<E> last;
 	
 	private static class Node<E> {
-		E element;
-		Node<E> prev;
-		Node<E> next;
+		E element;//当前node节点存储的元素
+		Node<E> prev;//上一个元素
+		Node<E> next;//下一个元素
+		//构造方法 
 		public Node(Node<E> prev, E element, Node<E> next) {
 			this.prev = prev;
 			this.element = element;
@@ -82,6 +83,7 @@ public class LinkList普通链表<E> extends AbstractList<E> {
 				oldLast.next = last;
 			}
 		} else {
+			//-------往首个或中间添加元素------------
 			Node<E> next = node(index); 
 			Node<E> prev = next.prev; 
 			Node<E> node = new Node<>(prev, element, next);

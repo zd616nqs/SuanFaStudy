@@ -5,125 +5,87 @@ import jeason.a线性表.b链表.common.AbstractList;
 //继承抽象父类，实现声明的方法
 public class LinkList普通链表<E> extends AbstractList<E> {
 	private Node<E> first;
-	private Node<E> last;
 	
 	private static class Node<E> {
 		E element;
-		Node<E> prev;
 		Node<E> next;
-		public Node(Node<E> prev, E element, Node<E> next) {
-			this.prev = prev;
+		public Node(E element, Node<E> next) {
 			this.element = element;
 			this.next = next;
 		}
-		
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			
-			if (prev != null) {
-				sb.append(prev.element);
-			} else {
-				sb.append("null");
-			}
-			
-			sb.append("_").append(element).append("_");
-
-			if (next != null) {
-				sb.append(next.element);
-			} else {
-				sb.append("null");
-			}
-			
-			return sb.toString();
-		}
 	}
 
-	
 	@Override
 	public void clear() {
-		//first和last的node节点置null，对应链表的所有引用都会销毁
 		size = 0;
 		first = null;
-		last = null;
 	}
 
 	@Override
 	public E get(int index) {
+		/*
+		 * 最好：O(1)
+		 * 最坏：O(n)
+		 * 平均：O(n)
+		 */
 		return node(index).element;
 	}
 
 	@Override
 	public E set(int index, E element) {
+		/*
+		 * 最好：O(1)
+		 * 最坏：O(n)
+		 * 平均：O(n)
+		 */
 		Node<E> node = node(index);
 		E old = node.element;
 		node.element = element;
 		return old;
 	}
 
-	/** 添加元素 */
+	//------------添加元素---------
 	@Override
 	public void add(int index, E element) {
+		/*
+		 * 最好：O(1)
+		 * 最坏：O(n)
+		 * 平均：O(n)
+		 */
 		rangeCheckForAdd(index);
-
-		// size == 0
-		// index == 0  
-		if (index == size) { 
-			//-----------往最后面添加元素----------
-			//获取最后一个节点
-			Node<E> oldLast = last;
-			//创建当前要插入的node节点
-			last = new Node<>(oldLast, element, null);
-			if (oldLast == null) {
-				// 这是链表添加的第一个元素 
-				first = last;
-			} else {
-				// 插入到当前链表的最后
-				oldLast.next = last;
-			}
-		} else {
-			Node<E> next = node(index); 
-			Node<E> prev = next.prev; 
-			Node<E> node = new Node<>(prev, element, next);
-			next.prev = node;
-			
-			if (prev == null) { 
-				//index == 0 插入到链表的首个位置
-				first = node;
-			} else {
-				// 正常插入链表
-				prev.next = node;
-			}
-		}
 		
+		if (index == 0) {
+			first = new Node<>(element, first);
+		} else {
+			Node<E> prev = node(index - 1);
+			prev.next = new Node<>(element, prev.next);
+		}
 		size++;
 	}
 
+	//----------删除元素--------------
 	@Override
 	public E remove(int index) {
+		/*
+		 * 最好：O(1)
+		 * 最坏：O(n)
+		 * 平均：O(n)
+		 */
 		rangeCheck(index);
-
-		Node<E> node = node(index);
-		Node<E> prev = node.prev;
-		Node<E> next = node.next;
 		
-		if (prev == null) { // index == 0
-			first = next;
+		Node<E> node = first;
+		if (index == 0) {
+			first = first.next;
 		} else {
-			prev.next = next;
+			Node<E> prev = node(index - 1);
+			node = prev.next;
+			prev.next = node.next;
 		}
-		
-		if (next == null) { // index == size - 1
-			last = prev;
-		} else {
-			//跨过中间的node，头尾的两个node进行引用，中间的node没有引用就销毁了
-			next.prev = prev;
-		}
-		
 		size--;
 		return node.element;
 	}
 
+	//------------获取元素下标---------------
 	@Override
 	public int indexOf(E element) {
 		if (element == null) {
@@ -144,27 +106,15 @@ public class LinkList普通链表<E> extends AbstractList<E> {
 		return ELEMENT_NOT_FOUND;
 	}
 	
-	/**
-	 * 获取index位置对应的节点对象
-	 * @param index
-	 * @return
-	 */
+	//-----------获取index位置对应的节点对象-------------
 	private Node<E> node(int index) {
 		rangeCheck(index);
 		
-		if (index < (size >> 1)) {
-			Node<E> node = first;
-			for (int i = 0; i < index; i++) {
-				node = node.next;
-			}
-			return node;
-		} else {
-			Node<E> node = last;
-			for (int i = size - 1; i > index; i--) {
-				node = node.prev;
-			}
-			return node;
+		Node<E> node = first;
+		for (int i = 0; i < index; i++) {
+			node = node.next;
 		}
+		return node;
 	}
 	
 	@Override
@@ -177,11 +127,12 @@ public class LinkList普通链表<E> extends AbstractList<E> {
 				string.append(", ");
 			}
 			
-			string.append(node);
+			string.append(node.element);
 			
 			node = node.next;
 		}
 		string.append("]");
+		
 		return string.toString();
 	}
 }
