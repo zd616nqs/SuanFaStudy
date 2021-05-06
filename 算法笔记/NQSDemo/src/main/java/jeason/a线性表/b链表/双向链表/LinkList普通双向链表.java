@@ -18,24 +18,23 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 			this.next = next;
 		}
 		
+
+		//打印出来，能够直观观察链表的引用
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
 			
 			if (prev != null) {
-				sb.append(prev.element);
+				sb.append("("+prev.element+")");
 			} else {
-				sb.append("null");
+				sb.append("(null)");
 			}
-			
 			sb.append("_").append(element).append("_");
-
 			if (next != null) {
-				sb.append(next.element);
+				sb.append("("+next.element+")");
 			} else {
-				sb.append("null");
+				sb.append("(null)");
 			}
-			
 			return sb.toString();
 		}
 	}
@@ -49,20 +48,7 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		last = null;
 	}
 
-	@Override
-	public E get(int index) {
-		return node(index).element;
-	}
-
-	@Override
-	public E set(int index, E element) {
-		Node<E> node = node(index);
-		E old = node.element;
-		node.element = element;
-		return old;
-	}
-
-	/** 添加元素 */
+	//--------------添加元素----------------
 	@Override
 	public void add(int index, E element) {
 		rangeCheckForAdd(index);
@@ -101,6 +87,8 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		size++;
 	}
 
+
+	//------------删除元素------------
 	@Override
 	public E remove(int index) {
 		rangeCheck(index);
@@ -108,17 +96,24 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		Node<E> node = node(index);
 		Node<E> prev = node.prev;
 		Node<E> next = node.next;
+
+		//跨过中间的node，头尾的两个node进行引用，中间的node没有引用就销毁了
 		
-		if (prev == null) { // index == 0
+		//------处理next节点------------
+		if (prev == null) { 
+			// 最开始的节点，index == 0
 			first = next;
 		} else {
+			// 正常引用next节点
 			prev.next = next;
 		}
 		
-		if (next == null) { // index == size - 1
+		//------处理prev节点------------
+		if (next == null) { 
+			// 最后一个节点，index == size - 1
 			last = prev;
 		} else {
-			//跨过中间的node，头尾的两个node进行引用，中间的node没有引用就销毁了
+			// 正常引用prev节点
 			next.prev = prev;
 		}
 		
@@ -138,8 +133,9 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		} else {
 			Node<E> node = first;
 			for (int i = 0; i < size; i++) {
-				if (element.equals(node.element)) return i;
-				
+				if (element.equals(node.element)) {
+					return i;
+				}
 				node = node.next;
 			}
 		}
@@ -167,6 +163,22 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 			}
 			return node;
 		}
+	}
+
+
+
+
+	@Override
+	public E get(int index) {
+		return node(index).element;
+	}
+
+	@Override
+	public E set(int index, E element) {
+		Node<E> node = node(index);
+		E old = node.element;
+		node.element = element;
+		return old;
 	}
 	
 	@Override

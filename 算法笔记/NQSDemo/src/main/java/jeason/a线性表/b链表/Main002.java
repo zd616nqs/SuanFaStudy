@@ -4,6 +4,7 @@ package jeason.a线性表.b链表;
 import jeason.a线性表.b链表.common.ListProtocol;
 import jeason.a线性表.b链表.单向链表.LinkList普通链表;
 import jeason.a线性表.b链表.单向链表.LinkList动态扩容缩容链表;
+import jeason.a线性表.b链表.双向链表.LinkList普通双向链表;
 
 public class Main002 {
 
@@ -16,11 +17,13 @@ public class Main002 {
 
 		//---------------单向链表----------
 		//普通单向链表的实现
-		test1();
+		// test1();
 		//动态扩容缩容单向链表
-		test2();
+		// test2();
 
 		//---------------双向链表----------
+		//普通双向链表
+		test3();
 	}
 
 	//普通单向链表的实现
@@ -58,5 +61,21 @@ public class Main002 {
 		 */
 	}
 
+	//普通双向链表
+	private static void test3() {
+		ListProtocol<Object> list3 =  new LinkList普通双向链表<>();
+		list3.add(11);
+		list3.add(22);
+		list3.add(33);
+		list3.add(44);
+		list3.add(55);
+		list3.add(66);
+		list3.add(77);
+		System.out.println(list3);
+		list3.remove(list3.indexOf(22));
+		System.out.println(list3);
+		// size=7, [(null)_11_(22), (11)_22_(33), (22)_33_(44), (33)_44_(55), (44)_55_(66), (55)_66_(77), (66)_77_(null)]
+		// size=6, [(null)_11_(33), (11)_33_(44), (33)_44_(55), (44)_55_(66), (55)_66_(77), (66)_77_(null)]
+	}
 	
 }
