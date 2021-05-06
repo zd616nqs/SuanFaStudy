@@ -23,23 +23,24 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 			StringBuilder sb = new StringBuilder();
 			
 			if (prev != null) {
-				sb.append(prev.element);
+				sb.append("("+prev.element+")");
 			} else {
-				sb.append("null");
+				sb.append("(null)");
 			}
 			
 			sb.append("_").append(element).append("_");
 
 			if (next != null) {
-				sb.append(next.element);
+				sb.append("("+next.element+")");
 			} else {
-				sb.append("null");
+				sb.append("(null)");
 			}
 			
 			return sb.toString();
 		}
 	}
 
+	//---------添加元素-------------
 	@Override
 	public void add(int index, E element) {
 		rangeCheckForAdd(index);
@@ -55,25 +56,31 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 				first.next = first;
 				first.prev = first;
 			} else {
+				//-------正常往最后面添加node节点------
 				oldLast.next = last;
 				first.prev = last;
 			}
 		} else {
+			//------往非结尾的位置添加node节点-------
 			Node<E> next = node(index); 
 			Node<E> prev = next.prev; 
 			Node<E> node = new Node<>(prev, element, next);
 			next.prev = node;
 			prev.next = node;
 			
-			if (next == first) { // index == 0
+			if (next == first) { 
+				// 往首部插入元素，index == 0
 				first = node;
 			}
 		}
 		
 		size++;
 	}
+
+	//---------删除元素-------------
 	private E remove(Node<E> node) {
 		if (size == 1) {
+			//-------链表只有1个元素------
 			first = null;
 			last = null;
 		} else {
@@ -82,11 +89,12 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 			prev.next = next;
 			next.prev = prev;
 			
-			if (node == first) { // index == 0
+			//删除首部： index == 0
+			if (node == first) { 
 				first = next;
 			}
-			
-			if (node == last) { // index == size - 1
+			//删除尾部：index == size - 1
+			if (node == last) { 
 				last = prev;
 			}
 		}
@@ -98,11 +106,13 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 
 
 
-	
+	//约瑟夫问题，循环链表相关方法
+	//循环链表：重置	
 	public void reset() {
 		current = first;
 	}
 	
+	//循环链表：下一步
 	public E next() {
 		if (current == null) return null;
 		
@@ -110,6 +120,7 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 		return current.element;
 	}
 	
+	//循环链表：删除current节点
 	public E remove() {
 		if (current == null) return null;
 		
@@ -123,6 +134,12 @@ public class LinkList双向循环链表<E> extends AbstractList<E> {
 		
 		return element;
 	}
+
+
+
+
+
+
 
 	@Override
 	public void clear() {

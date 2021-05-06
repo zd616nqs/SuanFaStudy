@@ -17,7 +17,7 @@ public class LinkList单向循环链表<E> extends AbstractList<E> {
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
-			sb.append(element).append("_").append(next.element);
+			sb.append(element).append("_").append("(next:"+next.element+")");
 			return sb.toString();
 		}
 	}
