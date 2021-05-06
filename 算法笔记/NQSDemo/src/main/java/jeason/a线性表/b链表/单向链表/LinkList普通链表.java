@@ -1,9 +1,9 @@
-package jeason.a线性表.b链表;
+package jeason.a线性表.b链表.单向链表;
 import jeason.a线性表.b链表.common.AbstractList;
 
 
 //继承抽象父类，实现声明的方法
-public class LinkList<E> extends AbstractList<E> {
+public class LinkList普通链表<E> extends AbstractList<E> {
 	private Node<E> first;
 	private Node<E> last;
 	
