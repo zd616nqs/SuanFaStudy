@@ -19,6 +19,7 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		}
 		
 
+		//java调用打印，默认调用的是toString方法
 		//打印出来，能够直观观察链表的引用
 		@Override
 		public String toString() {
@@ -39,10 +40,11 @@ public class LinkList普通双向链表<E> extends AbstractList<E> {
 		}
 	}
 
-	
+	//-------—----—清空元素-----------------
 	@Override
 	public void clear() {
 		//first和last的node节点置null，对应链表的所有引用都会销毁
+		//没有被GC Root对象引用的对象，引用都会被销毁
 		size = 0;
 		first = null;
 		last = null;

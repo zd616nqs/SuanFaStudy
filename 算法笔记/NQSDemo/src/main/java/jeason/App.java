@@ -8,19 +8,20 @@ public class App
 {
     public static void main( String[] args ) {
         
-        TimeTool.check("测试", new Task() {
+        TimeTool.check("开始执行代码", new Task() {
 			public void execute() {
-                System.out.println( "哈哈哈");
+                
+                //************************线性表*******************
+                //----动态数组---------
+                Main001.run(true);
+
+                //-----链表----------
+                Main002.run(true);
 			}
 		});
 
 
-        //************************线性表*******************
-        //----动态数组---------
-        Main001.run(false);
-
-        //-----链表----------
-        Main002.run(true);
+       
 
     }
 }
