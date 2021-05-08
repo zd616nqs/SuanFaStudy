@@ -1,10 +1,6 @@
 package jeason.a线性表.b链表;
 
 
-import java.util.List;
-
-import org.w3c.dom.Node;
-
 import jeason.a线性表.b链表.common.ListProtocol;
 import jeason.a线性表.b链表.单向链表.LinkList普通链表;
 import jeason.a线性表.b链表.单向链表.LinkList动态扩容缩容链表;
