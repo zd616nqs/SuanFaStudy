@@ -3,7 +3,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.w3c.dom.Node;
 
 import jeason.b树形结构.a二叉树.Printer工具类.base.BinaryTreeInfoProtocol;
 
@@ -227,7 +226,8 @@ public class BinarySearchTree二叉搜索树 <E> implements BinaryTreeInfoProtoc
 	
 
 
-	//
+	//-----判断是否是完全二叉树----------
+	//使用层序遍历 来判断
 	public boolean isComplete() {
 		if (root == null) return false;
 		
@@ -302,39 +302,6 @@ public class BinarySearchTree二叉搜索树 <E> implements BinaryTreeInfoProtoc
 	}
 	
 
-
-
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		toString(root, sb, "");
-		return sb.toString();
-	}
-	
-	private void toString(Node<E> node, StringBuilder sb, String prefix) {
-		if (node == null) return;
-
-		toString(node.left, sb, prefix + "L---");
-		sb.append(prefix).append(node.element).append("\n");
-		toString(node.right, sb, prefix + "R---");
-	}
-	
-	/**
-	 * @return 返回值等于0，代表e1和e2相等；返回值大于0，代表e1大于e2；返回值小于于0，代表e1小于e2
-	 */
-	private int compare(E e1, E e2) {
-		if (comparator != null) {
-			return comparator.compare(e1, e2);
-		}
-		return ((Comparable<E>)e1).compareTo(e2);
-	}
-	
-	private void elementNotNullCheck(E element) {
-		if (element == null) {
-			throw new IllegalArgumentException("element must not be null");
-		}
-	}
 	
 	@SuppressWarnings("unused")
 	private Node<E> predecessor(Node<E> node) {
@@ -408,6 +375,49 @@ public class BinarySearchTree二叉搜索树 <E> implements BinaryTreeInfoProtoc
 			return left != null && right != null;
 		}
 	}
+
+
+
+
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		toString(root, sb, "");
+		return sb.toString();
+	}
+	
+	private void toString(Node<E> node, StringBuilder sb, String prefix) {
+		if (node == null) return;
+
+		toString(node.left, sb, prefix + "L---");
+		sb.append(prefix).append(node.element).append("\n");
+		toString(node.right, sb, prefix + "R---");
+	}
+	
+
+	//--------判断两个节点的大小---------
+	// 返回值等于0，代表e1和e2相等；
+	// 返回值大于0，代表e1大于e2；
+	// 返回值小于于0，代表e1小于e2
+
+	private int compare(E e1, E e2) {
+		if (comparator != null) {
+			return comparator.compare(e1, e2);
+		}
+		return ((Comparable<E>)e1).compareTo(e2);
+	}
+	
+	
+	private void elementNotNullCheck(E element) {
+		if (element == null) {
+			throw new IllegalArgumentException("element must not be null");
+		}
+	}
+
+
+
+
 
 	@Override
 	public Object root() {

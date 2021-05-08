@@ -1,9 +1,8 @@
 package jeason.b树形结构.a二叉树;
 import java.util.Comparator;
 
-import jeason.b树形结构.a二叉树.*;
 import jeason.b树形结构.a二叉树.Printer工具类.*;
-import jeason.b树形结构.a二叉树.Files工具类.Files;
+// import jeason.b树形结构.a二叉树.Files工具类.Files;
 import jeason.b树形结构.a二叉树.BinarySearchTree二叉搜索树.Visitor;;
 
 public class Main005 {
@@ -34,13 +33,11 @@ public class Main005 {
 		test5(false);
 
 		//-----获取二叉树的高度(根节点开始、指定节点开始)------
-		test6(true);
+		test6(false);
 
-		test7(false);
+		//------判断是否是完全二叉树-----------
+		test7(true);
 
-		test8(false);
-
-		test9(false);
 
 	}
 
@@ -131,8 +128,8 @@ public class Main005 {
 			bst.add((int)(Math.random() * 100));
 		}
 		
-		String str = BinaryTrees.printString(bst);
-		str += "\n";
+		// String str = BinaryTrees.printString(bst);
+		// str += "\n";
 
 		BinaryTrees.println(bst);
 
@@ -257,24 +254,35 @@ public class Main005 {
 		BinaryTrees.println(bst);
 		System.out.println("二叉树的高度："+bst.height());
 		System.out.println("节点2的高度："+bst.SpecialHeight(2));
+
+//     ┌──7──┐
+//     │     │
+//   ┌─4─┐ ┌─9─┐
+//   │   │ │   │
+// ┌─2─┐ 5 8 ┌─11─┐
+// │   │     │    │
+// 1   3    10    12
+// 二叉树的高度：4
+// 节点2的高度：2
+
 	}
 
 
 	static void test7(boolean isWork) {
 		if(!isWork) return;
-
+		Integer data[] = new Integer[] {
+			7,4,2,1,3,5,9,8,11,10,12
+		};
+	
+		BinarySearchTree二叉搜索树<Integer> bst = new BinarySearchTree二叉搜索树<>();
+		for (int i = 0; i < data.length; i++) {
+			bst.add(data[i]);
+		}
+		BinaryTrees.println(bst);
+		System.out.println("是否是完整二叉树："+bst.isComplete());
 	}
 
 
-	static void test8(boolean isWork) {
-		if(!isWork) return;
-
-	}
-
-
-	static void test9(boolean isWork) {
-		if(!isWork) return;
-
-	}
+	
 	
 }
