@@ -6,15 +6,11 @@ public class Main006 {
 		if (!execute) {
 			return;
 		}
+
+		//没有测试代码,看不出效果,去网站上看动态动画,添加和删除的时候怎么平衡二叉树的平衡因子
 		
 		test1(false);
-		
-		test2(false);
-
-
-		test3(false);
-
-		test4(false);
+	
 	
 	}
 
@@ -26,26 +22,5 @@ public class Main006 {
 	}
 
 
-
-
-
-	private static void test2(boolean isWork) {
-		if(!isWork) return;
-		
-	}
-
-
-	private static void test3(boolean isWork) {
-		if(!isWork) return;
-
-		
-	}
-
-
-
-	private static void test4(boolean isWork) {
-		if(!isWork) return;
-
-	}
 	
 }

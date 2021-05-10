@@ -5,7 +5,7 @@ import jeason.a线性表.a动态数组.*;
 import jeason.a线性表.b链表.*;
 import jeason.a线性表.c栈.*;
 import jeason.a线性表.d队列.*;
-import jeason.b树形结构.a二叉树.Main005;
+import jeason.b树形结构.a二叉搜索树.Main005;
 
 public class App 
 {
