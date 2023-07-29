@@ -1,10 +1,10 @@
 package jeason;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+// import java.text.SimpleDateFormat;
+// import java.util.Date;
 
 public class TimeTool {
-	private static final SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.SSS");
+	// private static final SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.SSS");
 	
 	public interface Task {
 		void execute();

@@ -2,153 +2,73 @@ package jeason.A_Leetcode.二叉树;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// https://leetcode-cn.com/problems/invert-binary-tree/
+// https://leetcode.cn/problems/sum-root-to-leaf-numbers/
 
 
 
-public class _226_翻转二叉树 {
+public class _129_求根节点到叶节点数字之和 {
 
-
-
-    //*******************************************************
-    //前序遍历
-    private void preorder(TreeNode node) {
-		if (node == null) return;
-		
-        System.out.println(node.element);//在前面打印节点
-		preorder(node.left);
-		preorder(node.right);
-	}
-
-    //使用 前序遍历 翻转二叉树
-    public TreeNode invertTree1(TreeNode root){
-        if (root == null) return null;
-        // 保存右子树,然后交换左右子树的位置
-        TreeNode rightTree = root.right;
-        root.right = invertTree1(root.left);
-        root.left = invertTree1(rightTree);
-        return root;
+//定义TreeNode
+    private static class TreeNode {
+        int element;
+        TreeNode left;
+        TreeNode right;
     }
 
 
-    //*******************************************************
-    //中序遍历
-    private void inorder(TreeNode node) {
-		if (node == null) return;
-		
-		inorder(node.left);
-        System.out.println(node.element);//在中间打印节点
-		inorder(node.right);
-	}
-
-
-    //使用 中序遍历 翻转
-    public TreeNode invertTree2(TreeNode root){
-        if (root == null) return null;
-        // 递归找到左节点
-        invertTree2(root.left); 
-        // 保存右节点
-        TreeNode rightNode= root.right; 
-        root.right = root.left;
-        root.left = rightNode;
-        // 递归找到右节点 继续交换 : 因为此时左右节点已经交换了,所以此时的右节点为root.left
-        invertTree2(root.left); 
-        return root;
+    // 方法一：深度优先搜索
+    public int sumNumbers(TreeNode root) {
+        return dfs(root, 0);
     }
-    //*******************************************************
-    //后序遍历
-    private void postorder(TreeNode node) {
-		if (node == null) return;
-		
-		postorder(node.left);
-		postorder(node.right);
-		System.out.println(node.element);//在后面打印节点
-	}
     
-    //使用 后序遍历 翻转
-    public TreeNode invertTree3(TreeNode root){
-        // 后序遍历-- 从下向上交换
-        if (root == null) return null;
-        TreeNode leftNode = invertTree3(root.left);
-        TreeNode rightNode = invertTree3(root.right);
-        root.right = leftNode;
-        root.left = rightNode;
-        return root;
+    public int dfs(TreeNode root, int prevSum) {
+        if (root == null) {
+            return 0;
+        }
+        int sum = prevSum * 10 + root.element;
+        if (root.left == null && root.right == null) {
+            return sum;
+        } else {
+            return dfs(root.left, sum) + dfs(root.right, sum);
+        }
     }
-    //*******************************************************
-
-    //层序遍历
-    public void levelOrder(TreeNode root) {
-		if (root == null) return;
-		
-		Queue<TreeNode> queue = new LinkedList<>();
-		//根节点 入队列
-		queue.offer(root);
-		
-		while (!queue.isEmpty()) {
-			//取出队头后，删除该元素，队头向后移1位
-			TreeNode node = queue.poll();
-
-			System.out.println(node.element);//在此处打印节点
-
-			if (node.left != null) {
-				//左节点 入队列
-				queue.offer(node.left);
-			}
-			
-			if (node.right != null) {
-				//右节点 入队列
-				queue.offer(node.right);
-			}
-		}
-	}
-
-    //使用 层序遍历 翻转
-    public TreeNode invertTree4(TreeNode root){
-        // 层次遍历--直接左右交换即可
-        if (root == null) return null;
-        Queue<TreeNode> queue = new LinkedList<>();
-
-        queue.offer(root);//取出队头后，删除该元素，队头向后移1位
-
-        while (!queue.isEmpty()){
-            TreeNode node = queue.poll();//入队
-
-            //此处操作交换
-            TreeNode rightTree = node.right;
-            node.right = node.left;
-            node.left = rightTree;
 
 
-            if (node.left != null){
-                //左节点 入队列
-                queue.offer(node.left);
-            }
-            if (node.right != null){
-                //右节点 入队列
-                queue.offer(node.right);
+// 方法二：广度优先搜索
+    public int sumNumbers2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int sum = 0;
+        Queue<TreeNode> nodeQueue = new LinkedList<TreeNode>();
+        Queue<Integer> numQueue = new LinkedList<Integer>();
+        nodeQueue.offer(root);//入队列
+        numQueue.offer(root.element);//入队列
+
+        while (!nodeQueue.isEmpty()) {
+            TreeNode node = nodeQueue.poll();//取出队头并且删除当前队头
+            int num = numQueue.poll();//取出队头并且删除当前队头
+
+            //取出当前循环的左右子节点
+            TreeNode left = node.left;
+            TreeNode right = node.right;
+
+
+            if (left == null && right == null) {
+                //当前节点没有子节点，sum增加，知道所有子节点遍历完，就是最终的值
+                sum += num;
+            } else {
+                if (left != null) {
+                    nodeQueue.offer(left);//将左子节点入队
+                    numQueue.offer(num * 10 + left.element);//左子节点的值入队
+                }
+                if (right != null) {
+                    nodeQueue.offer(right);//将右子节点入队
+                    numQueue.offer(num * 10 + right.element);//将右子节点的值入队
+                }
             }
         }
-        return root;
+        return sum;
     }
-
-
-
-
-
-
-    //定义TreeNode
-    private static class TreeNode {
-		int element;
-		TreeNode left;
-		TreeNode right;
-		TreeNode parent;
-		public TreeNode(int element, TreeNode parent) {
-			this.element = element;
-			this.parent = parent;
-		}
-
-	}
-
 
 }

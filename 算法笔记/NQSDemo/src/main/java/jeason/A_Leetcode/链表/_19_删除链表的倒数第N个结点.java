@@ -1,17 +1,51 @@
 package jeason.A_Leetcode.链表;
 
-//https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
-// 输入：head = [4,5,1,9], node = 5
-// 输出：[4,1,9]
-// 解释：给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+// https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 
 
-class _237_删除链表中的节点 {
+class _19_删除链表的倒数第N个结点 {
 
-    public void deleteNode(ListNode node) {
-        if(node == null) return;
+   //方法一：快慢指针法   fast指针比slow指针超前N个节点
+    public ListNode removeNthFromEnd1(ListNode head, int n) {
+        ListNode tempHead = head;
+        ListNode fast = head;
+        ListNode slow = head;
+        //s指针比first指针领先n个节点
+        for (int i = 0; i < n; ++i) {
+            fast = fast.next;
+        }
+        //fast指针循环走到链表最后
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        ListNode resultNode = tempHead.next;
+        return resultNode;
+    }
 
-        node.val = node.next.val;
-        node.next = node.next.next;
+
+    // 方法二：遍历搜索法  时间复杂度O(n)，空间复杂度O(1)
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode tempHead = head;
+        int length = getLength(head);
+        ListNode cur = tempHead;
+        for (int i = 1; i < length - n + 1; ++i) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+
+        ListNode resultNode = tempHead.next;
+        return resultNode;
+    }
+    //计算整个链表的长度
+    public int getLength(ListNode head) {
+        int length = 0;
+        while (head != null) {
+            ++length;
+            head = head.next;
+        }
+        return length;
     }
 }
+

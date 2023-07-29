@@ -1,17 +1,26 @@
 package jeason.A_Leetcode.链表;
 
-//https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
-// 输入：head = [4,5,1,9], node = 5
-// 输出：[4,1,9]
-// 解释：给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+// https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
 
 
-class _237_删除链表中的节点 {
+class _83_删除排序链表中的重复元素 {
+    // 输入：head = [1,1,2,3,3]
+    // 输出：[1,2,3]
 
-    public void deleteNode(ListNode node) {
-        if(node == null) return;
+    //思路一次遍历   连续两个元素相同就删除一个
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return head;
+        }
 
-        node.val = node.next.val;
-        node.next = node.next.next;
+        ListNode cur = head;
+        while (cur.next != null) {
+            if (cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
     }
 }
