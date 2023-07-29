@@ -1,10 +1,10 @@
 package jeason.A_Leetcode.数组;
-import java.util.ArrayList;
-import java.util.List;
+
 
 // https://leetcode-cn.com/problems/implement-queue-using-stacks/
 
-
+import java.util.ArrayList;
+import java.util.List;
 public class _442_数组中重复的数据_无序数组 {
 
     // 输入:[4,3,2,7,8,2,3,1]     输出:[2,3]

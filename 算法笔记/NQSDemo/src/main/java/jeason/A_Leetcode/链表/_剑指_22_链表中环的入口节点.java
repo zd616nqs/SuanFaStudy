@@ -2,7 +2,7 @@ package jeason.A_Leetcode.链表;
 
 
 // https://leetcode.cn/problems/c32eOV/
-class _142_环形链表的入口节点 {
+class _剑指_22_链表中环的入口节点 {
 //思路：从头结点出发一个指针，从相遇节点也出发一个指针，这两个指针每次只走一个节点，那么当这两个指针相遇的时候就是 环形入口的节点
 
     public ListNode detectCycle(ListNode head) {

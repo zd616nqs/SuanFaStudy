@@ -1,6 +1,5 @@
 package jeason.A_Leetcode.栈;
-import java.util.HashMap;
-import java.util.Stack;
+
 
 // https://leetcode-cn.com/problems/valid-parentheses/
 // 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
@@ -8,6 +7,8 @@ import java.util.Stack;
 // 左括号必须用相同类型的右括号闭合。
 // 左括号必须以正确的顺序闭合。
 
+import java.util.HashMap;
+import java.util.Stack;
 
 class _20_有效的括号 {
 

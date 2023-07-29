@@ -1,10 +1,11 @@
 package jeason.A_Leetcode.二叉树;
-import java.util.LinkedList;
-import java.util.Queue;
+
 
 // https://leetcode.cn/problems/sum-root-to-leaf-numbers/
 
 
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class _129_求根节点到叶节点数字之和 {
 
@@ -34,7 +35,7 @@ public class _129_求根节点到叶节点数字之和 {
     }
 
 
-// 方法二：广度优先搜索
+    // 方法二：广度优先搜索
     public int sumNumbers2(TreeNode root) {
         if (root == null) {
             return 0;

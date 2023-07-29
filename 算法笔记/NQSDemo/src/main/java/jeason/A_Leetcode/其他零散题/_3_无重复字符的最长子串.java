@@ -1,12 +1,12 @@
 package jeason.A_Leetcode.其他零散题;
 
-import java.util.HashMap;
+
 // https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 // 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
 // 输入: s = "abcabcbb"
 // 输出: 3 
 // 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
-
+import java.util.HashMap;
 
 public class _3_无重复字符的最长子串 {
 
