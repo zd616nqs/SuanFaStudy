@@ -6,20 +6,20 @@ package jeason.A_Leetcode.链表;
 
 class _206_反转链表 {
 
-    //使用递归方式反转
+    //方法1：使用递归方式反转
     public ListNode reverseList1(ListNode head) {
         if(head == null) return null;
         if(head.next == null) return head;
 
         ListNode newHead = reverseList1(head);
         head.next.next = head;
-        head.next = null;
+        head.next = null;//此处置null，防止相互指向行程环形链表
         return newHead;
     }
 
 
 
-    //使用头插法反转
+    //方法2：使用头插法反转
     public ListNode reverseList2(ListNode head) {
         if(head == null) return null;
         if(head.next == null) return head;
@@ -33,7 +33,5 @@ class _206_反转链表 {
         }
         return finalHead;
     }
-
-
 
 }

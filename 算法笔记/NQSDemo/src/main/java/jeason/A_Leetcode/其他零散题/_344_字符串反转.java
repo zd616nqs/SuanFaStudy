@@ -1,55 +1,18 @@
-package jeason.A_Leetcode.队列;
+package jeason.A_Leetcode.其他零散题;
 
 
-// https://leetcode-cn.com/problems/implement-queue-using-stacks/
+// https://leetcode.cn/problems/reverse-string/
 
 
-import java.util.Stack;
+public class _344_字符串反转 {
 
-public class _232_用栈实现队列 {
-
-    //准备两个栈来实现
-	private Stack<Integer> inStack;
-	private Stack<Integer> outStack;
-
-    public _232_用栈实现队列() {
-        inStack = new Stack<>();
-        outStack = new Stack<>();
-    }
-    
-    /** 入队 */
-    public void push(int x) {
-        inStack.push(x);
-    }
-    
-    /** 出队 */
-    public int pop() {
-
-        //如果outStack为空：将inStack所有元素逐个弹出，push到outStack中，然后outStack执行pop
-        //如果outStack不为空，直接从outStack执行pop
-        checkOutStack();
-        return outStack.pop();
-    }
-    
-    /** 获取队头元素 */
-    public int peek() {
-        //如果outStack为空：将inStack所有元素逐个弹出，push到outStack中，然后获取outStack栈顶元素
-        //如果outStack不为空，直接获取outStack栈顶元素
-        checkOutStack();
-        return outStack.peek();
-    }
-    
-    /** 是否为空 */
-    public boolean empty() {
-        return inStack.isEmpty() && outStack.isEmpty();
-    }
-    
-    private void checkOutStack() {
-        if (outStack.isEmpty()) {
-            while (!inStack.isEmpty()) {
-                //将inStack的所有元素依次pop，再依次push到outStack,实现两个栈的元素顺序颠倒
-                outStack.push(inStack.pop());
-            }
+   //思路：双指针法，一个从前到后，一个后到前，替换两个字符串
+    public void reverseString(char[] s) {
+        int n = s.length;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];//临时存储左边的字符串
+            s[left] = s[right];//右侧的移动到左侧
+            s[right] = tmp;//左侧的移动到右侧
         }
     }
 }
