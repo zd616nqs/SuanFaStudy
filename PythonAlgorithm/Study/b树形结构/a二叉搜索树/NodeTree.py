@@ -6,7 +6,7 @@
 
 
 # @func_cal_time
-def exampleFun(para1: str, para2: int):
+def exampleFun22(para1: str, para2: int):
     print(f"para1:{para1}, para2:{para2}")
     
 # exampleFun("牛牛", 222)
