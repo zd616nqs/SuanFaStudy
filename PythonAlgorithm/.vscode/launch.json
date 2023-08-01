@@ -5,10 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: 模块",
+            "name": "StudyEntry入口",
             "type": "python",
             "request": "launch",
             "module": "StudyEntry",
+            "justMyCode": true
+        },
+        {
+            "name": "LeetCode入口",
+            "type": "python",
+            "request": "launch",
+            "module": "LeetCodeEntry",
             "justMyCode": true
         }
     ]

@@ -19,7 +19,7 @@ public class App
                 Main001.run(false);
 
                 //-----链表----------
-                Main002.run(false);
+                Main002.run(true);
 
                 //-----栈----------
                 Main003.run(false);
@@ -28,7 +28,7 @@ public class App
 
                 //***********************树形结构********************
                 //----二叉搜索树-------
-                Main005.run(true);
+                Main005.run(false);
 
 			}
 		});

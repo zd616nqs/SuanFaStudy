@@ -19,7 +19,7 @@ public class Main002 {
 
 		//---------------单向链表----------
 		//普通单向链表的实现
-		test1(false);
+		test1(true);
 		//动态扩容缩容单向链表
 		test2(false);
 
@@ -34,7 +34,7 @@ public class Main002 {
 		test5(false);
 
 		//解决约瑟夫问题:使用循环链表就能实现(单向和双向都可以)
-		test6(true);
+		test6(false);
 	}
 
 	//普通单向链表的实现

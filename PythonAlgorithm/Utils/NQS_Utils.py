@@ -3,10 +3,11 @@ import time
 import inspect
 
 
-class NQS_Utils(object):
+class Utils(object):
     
     
     # ----------函数的执行耗时打印--------
+    @staticmethod
     def func_cal_time(func):
         # print('耗时计算方法被调用了！！')
         # print('func={}'.format(func))  # func=<function demo at 0x107988720>
@@ -24,7 +25,7 @@ class NQS_Utils(object):
     # 使用方式：
     #    @param_type_validate
     #    def exampleFunc(para1:int, para2: str) {}
-        
+    @staticmethod
     def param_type_validate(func):
         def inner(*args, **kwargs):
             full_args_spec = inspect.getfullargspec(func)
@@ -42,3 +43,9 @@ class NQS_Utils(object):
                         raise TypeError(f"{v}不是{full_args_spec.annotations[k]}")
             func(*args, **kwargs)
         return inner
+    
+    # 强制校验所有的抽象方法有没有被实现
+    def check_implement(cls):
+        for abstract_method in cls.__abstractmethods__:
+            if not hasattr(cls, abstract_method):
+                raise NotImplementedError(f"牛牛警报！！自定义的抽象方法没有实现：{abstract_method} ")
