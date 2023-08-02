@@ -6,10 +6,23 @@ E = TypeVar('E')
 class Node(Generic[E]):
     def __init__(self, element: E, next):
         self.element = element
-        self.next = next
+        self.next: Node = next
+
+    # 打印当前node的前后关系
+    def __str__(self) -> str:
+        nodeStr: str = ""
+
+        # 拼接当前node
+        nodeStr = f"{self.element}" + "_"
+        # 拼接下个node
+        if self.next is None:
+            nodeStr = nodeStr + "(null)"
+        else:
+            nodeStr = nodeStr + f"({self.next.element})"
+        return nodeStr
 
 
-class LinkList普通链表(AbstractList, Generic[E]):
+class LinkList单向循环链表(AbstractList, Generic[E]):
 
     def __init__(self) -> None:
         # 元素数量（初始0）
@@ -38,13 +51,6 @@ class LinkList普通链表(AbstractList, Generic[E]):
 
         resultNode: Node = self.__getNodeAtIndex(index)
         return resultNode.element
-    
-    def getNodeAtIndex(self, *, index: int) -> Node:
-        self.__rangeCheck(index)
-        # 获取index位置的元素
-
-        resultNode: Node = self.__getNodeAtIndex(index)
-        return resultNode
 
     def setElementAtIndex(self, *, index: int, element: E):
         # 设置index位置的元素
@@ -52,20 +58,10 @@ class LinkList普通链表(AbstractList, Generic[E]):
 
         resultNode: Node = self.__getNodeAtIndex(index)
         resultNode.element = element
-
+    
     def addElementToTail(self, *, element: E):
-        # 添加元素到最后
-        if self.__nodeCount == 0:
-            # 创建第一个节点，next指向None
-            self.__firstNode = Node(element, self.__firstNode)
-        else:
-            # 1.找到insert的下标的前一个node节点
-            endNode: Node = self.__getNodeAtIndex(self.__nodeCount - 1)
-            # 2.新建插入节点，将其next指向原本在index位置的节点
-            new_end_node = Node(element, endNode.next)
-            # 3.将原本index前1位节点的next，指向新建节点
-            endNode.next = new_end_node
-        self.__nodeCount += 1
+        pass
+        
 
     def insertElementAtIndex(self, *, index: int, element: E):
         # 在index位置插入一个元素
@@ -74,30 +70,35 @@ class LinkList普通链表(AbstractList, Generic[E]):
         if index == 0:
             # 创建第一个节点，next指向None
             self.__firstNode = Node(element, self.__firstNode)
+            if self.__nodeCount == 0:
+                self.__firstNode.next = self.__firstNode
+            else:
+                lastNode: Node = self.__getNodeAtIndex(self.__nodeCount - 1)
+                lastNode.next = self.__firstNode
         else:
-            # 1.找到insert的下标的前一个node节点
-            prevNode: Node = self.__getNodeAtIndex(index - 1)
-            # 2.新建插入节点，将其next指向原本在index位置的节点
-            new_insert_node = Node(element, prevNode.next)
-            # 3.将原本index前1位节点的next，指向新建节点
-            prevNode.next = new_insert_node
+            prevNode: Node = self.__getNodeAtIndex(index-1)
+            nextNode: Node = prevNode.next
+            insertNode: Node = Node(element, nextNode)
+            prevNode.next = insertNode
+
         self.__nodeCount += 1
 
     def removeElementAtIndex(self, *, index: int):
         # 删除一个位置的元素
         self.__rangeCheck(index)
 
-        curNode: Node = self.__firstNode
-        if index == 0:
-            # 删除首个节点，把原本的第二个节点指向为首节点
-            self.__firstNode = self.__firstNode.next
+        if self.__nodeCount == 1:
+            self.__firstNode = None
         else:
-            # 将prevNode.next指向prevNode.next.next
-            prevNode: Node = self.__getNodeAtIndex(index - 1)
-            curNode = prevNode.next
-            prevNode.next = curNode.next
+            if index == 0:
+                self.__firstNode = self.__firstNode.next
+                lastNode = self.__getNodeAtIndex(self.__nodeCount - 1)
+                lastNode.next = self.__firstNode
+            else:
+                prevNode: Node = self.__getNodeAtIndex(index - 1)
+                nextNode: Node = prevNode.next.next
+                prevNode.next = nextNode
         self.__nodeCount -= 1
-        
 
     def indexOfElement(self, *, element: E) -> int:
         # 查看元素的索引
@@ -146,7 +147,7 @@ class LinkList普通链表(AbstractList, Generic[E]):
             self.__out_of_bounds(index)
 
     def __str__(self) -> str:
-        string = ["单向链表汇总：\n\t元素数量:" + str(self.__nodeCount) + ", \n\t"]
+        string = ["单向循环链表汇总：\n\t元素数量:" + str(self.__nodeCount) + ", \n\t"]
         for i in range(self.__nodeCount):
             if i != 0:
                 string.append("\n\t")
