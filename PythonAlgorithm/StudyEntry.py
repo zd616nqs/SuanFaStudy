@@ -18,10 +18,10 @@ def main_study():
         # ************************线性表*******************
         
         # ----动态数组---------
-        StudyEntry001.run(execute=True)
+        StudyEntry001.run(execute=False)
 
         # -----链表----------
-        StudyEntry002.run(execute=False)
+        StudyEntry002.run(execute=True)
 
         # -----栈----------
         # StudyEntry003.run(false);
