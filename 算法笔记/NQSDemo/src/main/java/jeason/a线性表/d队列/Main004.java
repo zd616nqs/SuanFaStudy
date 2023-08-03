@@ -19,10 +19,10 @@ public class Main004 {
 		//3.循环单端队列：只能队头添加、队尾删除
 		//添加后 动态扩容但队头不变
 		//删除后 容量变小，并且队头指向向后走1位，到最大容量处返回零重新循环
-		test3(true);
+		test3(false);
 
 		//4.循环双端队列：队头和队尾都能 添加和删除
-		test4(false);
+		test4(true);
 	
 	}
 
@@ -147,6 +147,7 @@ public class Main004 {
 		for (int a = 1; a <= 5; a++) {
 			queue4.enQueueFront(a);//头部入队
 			queue4.enQueueRear(100+a);//尾部入队 动态扩容
+			System.out.println(queue4.front());
 		}
 		System.out.println(queue4);
 		// 总容量=15 占用容量=11 队头front指向=0, 

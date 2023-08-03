@@ -35,17 +35,17 @@ class 循环单端队列(Generic[E]):
         self.frontPos = 0
         self.__eleCount = 0
 
-    def enQueue(self, element: E):
-        # front指针出入队列
+    def enQueueWithTail(self, element: E):
+        # -----从队尾入列-----
         self.__ensure_capacity(self.__eleCount + 1)
 
         enQueuePos: int = self.caculateFrontIndex(self.__eleCount)
         self.__elements[enQueuePos] = element
         self.__eleCount += 1
 
-    def deQueue(self):
-        # 获取队头指向的元素
-        # frontEle: E = self.__elements[self.frontPos]
+    def deQueueWithFront(self):
+        # -----从队首出列----
+        
         # 删除队头指向的元素
         self.__elements[self.frontPos] = "null"
         # 队头向后移动1位
@@ -68,14 +68,6 @@ class 循环单端队列(Generic[E]):
             # 正常左右移动
             return newFrontPos
             
-    # def caculateExcutePos(self, eleCounts: int) -> int:
-    #     tempTailIndex: int = self.frontPos + eleCounts
-    #     temp: int = 0
-    #     if tempTailIndex > len(self.__elements):
-    #         temp = len(self.__elements)
-    #     else:
-    #         temp = 0
-    #     return tempTailIndex - temp
 
     def __ensure_capacity(self, tempCapacity: int):
         # 保证要有capacity的容量

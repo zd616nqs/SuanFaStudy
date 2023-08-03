@@ -38,7 +38,7 @@ public class CircleQueue循环单端队列<E> {
 		return frontElement;
 	}
 
-	//----指定队头移动的步数(到达最大值后归零继续)--------
+	//----指定队头移动的步数(到达最大值后，回到首位，继续往后走完步数)--------
 	private int index(int index) {
 		index += front;
 		int temp = (index >= elements.length ? elements.length : 0);
