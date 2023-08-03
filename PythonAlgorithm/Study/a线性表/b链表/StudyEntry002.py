@@ -1,4 +1,3 @@
-from Utils.NQS_Utils import Utils
 from .单向链表.LinkList普通链表 import LinkList普通链表
 from .双向链表.LinkList普通双向链表 import LinkList普通双向链表
 from .循环链表.LinkList单向循环链表 import LinkList单向循环链表
@@ -11,7 +10,6 @@ class StudyEntry002(object):
         pass
 
     @staticmethod
-    @Utils.func_cal_time
     def run(*, execute: bool):
         if (not execute):
             return

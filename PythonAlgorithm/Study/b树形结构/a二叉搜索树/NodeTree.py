@@ -1,11 +1,10 @@
 
-# from ....NQS_Utils import func_cal_time
 # from typing import Generic, TypeVar, List
 
 # E = TypeVar('E')
 
 
-# @func_cal_time
+
 def exampleFun22(para1: str, para2: int):
     print(f"para1:{para1}, para2:{para2}")
     

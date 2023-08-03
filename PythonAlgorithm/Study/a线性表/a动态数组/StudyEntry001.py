@@ -1,4 +1,3 @@
-from Utils.NQS_Utils import Utils
 from .ArrayList import ArrayListClass, Person
 
 
@@ -8,7 +7,6 @@ class StudyEntry001(object):
         pass
     
     @staticmethod
-    @Utils.func_cal_time
     def run(*, execute: bool):
         if (not execute):
             return

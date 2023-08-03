@@ -5,12 +5,16 @@ import os
 RootDirPath = os.path.abspath(os.path.dirname(os.getcwd())) + "/PythonAlgorithm"
 sys.path.append(RootDirPath)
 
+from Utils.NQS_Utils import Utils
+
 
 from Study.a线性表.a动态数组.StudyEntry001 import StudyEntry001
 from Study.a线性表.b链表.StudyEntry002 import StudyEntry002
+from Study.a线性表.c栈.StudyEntry003 import StudyEntry003
+from Study.a线性表.d队列.StudyEntry004 import StudyEntry004
 
 
-
+@Utils.func_cal_time
 def main_study():
     try:
         print("--------程序开始执行---------\n\n")
@@ -21,16 +25,16 @@ def main_study():
         StudyEntry001.run(execute=False)
 
         # -----链表----------
-        StudyEntry002.run(execute=True)
+        StudyEntry002.run(execute=False)
 
         # -----栈----------
-        # StudyEntry003.run(false);
+        StudyEntry003.run(execute=False)
         # -----队列----------
-        # StudyEntry004.run(false);
+        StudyEntry004.run(execute=True)
 
         # ***********************树形结构********************
         # ----二叉搜索树-------
-        # StudyEntry005.run(false);
+        # StudyEntry005.run(false)
         
         
         

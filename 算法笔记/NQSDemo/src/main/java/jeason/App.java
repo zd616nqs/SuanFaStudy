@@ -19,12 +19,12 @@ public class App
                 Main001.run(false);
 
                 //-----链表----------
-                Main002.run(true);
+                Main002.run(false);
 
                 //-----栈----------
                 Main003.run(false);
                 //-----队列----------
-                Main004.run(false);
+                Main004.run(true);
 
                 //***********************树形结构********************
                 //----二叉搜索树-------

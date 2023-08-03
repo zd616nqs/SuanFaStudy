@@ -53,6 +53,10 @@ class LinkList普通双向链表(AbstractList, Generic[E]):
         # 是否包含某个元素
         return self.indexOfElement(element=element) is not self.__ELEMENT_NOT_FOUND
 
+    def nodeCount(self) -> int:
+        # 元素个数
+        return self.__nodeCount
+    
     def getElementAtIndex(self, *, index: int) -> E:
         self.__rangeCheck(index)
         # 获取index位置的元素
@@ -76,37 +80,37 @@ class LinkList普通双向链表(AbstractList, Generic[E]):
 
     def addElementToTail(self, *, element: E):
         # 添加元素到最后
-        if self.__nodeCount == 0:
-            # 创建第一个节点，next指向None
-            self.__firstNode = Node(element, self.__firstNode, self.__lastNode)
-            self.__lastNode = self.__firstNode
-        else:
-            # 正常往链表后面加node
-            origin_last_node = self.__lastNode
-            new_end_node = Node(element, origin_last_node.prev, None)
-            origin_last_node.next = new_end_node
-            self.__lastNode = new_end_node
-
-        self.__nodeCount += 1
+        self.insertElementAtIndex(element=element, index=self.__nodeCount)
+        
 
     def insertElementAtIndex(self, *, index: int, element: E):
         # 在index位置插入一个元素
         self.__rangeCheckForAdd(index)
 
-        nextNode: Node = self.__getNodeAtIndex(index)
-        prevNode: Node = nextNode.prev
-        insertNode: Node = Node(element=element, prev=prevNode, next=nextNode)
-
-        if prevNode is None:
+        if self.__nodeCount == 0:
+            # 插入的第一个元素
+            insertNode: Node = Node(element=element, prev=None, next=None)
             self.__firstNode = insertNode
-        else:
-            prevNode.next = insertNode
-
-        if nextNode is None:
             self.__lastNode = insertNode
         else:
-            nextNode.prev = insertNode
-
+            if index == 0:
+                # 往链表的首位插入元素
+                insertNode: Node = Node(element=element, prev=None, next=self.__firstNode)
+                self.__firstNode.prev = insertNode
+                self.__firstNode = insertNode
+            elif index == self.__nodeCount:
+                # 往链表的最后插入元素
+                insertNode: Node = Node(element=element, prev=self.__lastNode, next=None)
+                self.__lastNode.next = insertNode
+                self.__lastNode = insertNode
+            else:
+                # 正常往链表的中间插入元素
+                prevNode: Node = self.__getNodeAtIndex(index - 1)
+                nextNode: Node = prevNode.next.next
+                insertNode: Node = insertNode(element=element, prev=prevNode, next=nextNode)
+                prevNode.next = insertNode
+                nextNode.prev = insertNode
+                
         self.__nodeCount += 1
 
 
