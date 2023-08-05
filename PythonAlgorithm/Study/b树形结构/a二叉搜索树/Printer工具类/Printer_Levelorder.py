@@ -1,5 +1,4 @@
 # from abc import ABC, abstractmethod
-from .Printer import Printer
 from .BinaryTree_AbstractInfo import BinaryTree_AbstractInfo
 from .StringTool import StringTool
 import sys
@@ -17,18 +16,30 @@ from typing import List
 
 
 # 实现中序打印器
-class Printer_Levelorder(Printer):
+class Printer_Levelorder(object):
     """
     按层序遍历顺序打印二叉树
     """
 
     def __init__(self, tree: BinaryTree_AbstractInfo):
-        super().__init__(tree)
+        self.tree: BinaryTree_AbstractInfo = tree
 
         self.root = Node(tree.root(), tree)
         self.max_width = self.root.width
         self.min_x = 0
         self.MIN_SPACE = 1  # 节点之间允许的最小间距（最小只能填1）
+        
+    def print(self):
+        """单纯打印"""
+        finalStr: str = self.print_string()
+        print(f"{finalStr}")
+    
+    def println(self):
+        """打印后换行"""
+        finalStr: str = self.print_string()
+        print(f"{finalStr}")
+        print()
+        
 
     def print_string(self) -> str:
         """

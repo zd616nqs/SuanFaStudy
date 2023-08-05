@@ -1,5 +1,4 @@
 # from abc import ABC, abstractmethod
-from .Printer import Printer
 from .BinaryTree_AbstractInfo import BinaryTree_AbstractInfo
 from .StringTool import StringTool
 
@@ -23,7 +22,7 @@ from .StringTool import StringTool
 
 
 # 实现中序打印器
-class Printer_Inorder(Printer):
+class Printer_Inorder(object):
     """
     按中序遍历顺序打印二叉树
     类属性:
@@ -39,17 +38,29 @@ class Printer_Inorder(Printer):
     line_append = "│" + StringTool.blank(defaultLength)   
 
     def __init__(self, tree: BinaryTree_AbstractInfo):
-        super().__init__(tree)
+        self.tree: BinaryTree_AbstractInfo = tree
 
+    def print(self):
+        """单纯打印"""
+        finalStr: str = self.print_string()
+        print(f"{finalStr}")
+    
+    def println(self):
+        """打印后换行"""
+        finalStr: str = self.print_string()
+        print(f"{finalStr}")
+        print()
+        
     def print_string(self) -> str:
         """生成整个树状图的字符串"""
-        result: str = self._print_string(self.tree.root(), "", "", "")
+        result: str = self.__print_string(self.tree.root(), "", "", "")
         result = result[:-1] # 删除最后一个字符
         return result
     
+    
 
 
-    def _print_string(self, node: object, node_prefix: str, left_prefix: str, right_prefix: str):
+    def __print_string(self, node: object, node_prefix: str, left_prefix: str, right_prefix: str):
         """ 
         生成node节点的字符串
         参数：
@@ -69,13 +80,13 @@ class Printer_Inorder(Printer):
         node_string: str = ""  
         if right is not None:  
             right_prefix += StringTool.blank(length) 
-            node_string += self._print_string(right, right_prefix + self.right_append, right_prefix + self.line_append, right_prefix + self.blank_append)   
+            node_string += self.__print_string(right, right_prefix + self.right_append, right_prefix + self.line_append, right_prefix + self.blank_append)   
                 
         node_string += (node_prefix + string + "\n")
         
         if left is not None:                
             left_prefix += StringTool.blank(length)
-            node_string += self._print_string(left, left_prefix + self.left_append, left_prefix + self.blank_append, left_prefix + self.line_append)            
+            node_string += self.__print_string(left, left_prefix + self.left_append, left_prefix + self.blank_append, left_prefix + self.line_append)            
                 
         return node_string
 
