@@ -4,11 +4,11 @@ E = TypeVar('E')
 
 # ABC：定义抽象类
 # abstractmethod：定义抽象方法
-class BinaryTreeInfoProtocol(ABC, Generic[E]):
+class BinaryTree_AbstractInfo(ABC, Generic[E]):
 
     # 获取根节点
     @abstractmethod
-    def root(self, node: E) -> E: pass
+    def root(self) -> E: pass
 
     # 获取左节点
     @abstractmethod

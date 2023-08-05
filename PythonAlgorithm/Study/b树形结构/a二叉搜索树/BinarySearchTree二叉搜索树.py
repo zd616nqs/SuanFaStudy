@@ -66,6 +66,7 @@ class BinarySearchTree二叉搜索树(BinaryTree_AbstractInfo, Generic(E)):
 
 
 
+    
     def __str__(self) -> str:
         tempStr: str = ""
         self.printTree(node=self.rootNode, treeStr=tempStr, prefix="")

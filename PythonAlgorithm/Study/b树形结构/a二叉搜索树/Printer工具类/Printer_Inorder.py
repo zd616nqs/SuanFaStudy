@@ -3,17 +3,34 @@ from .Printer import Printer
 from .BinaryTree_AbstractInfo import BinaryTree_AbstractInfo
 from .StringTool import StringTool
 
+
+
+#              ┌──800
+#          ┌──760
+#          │   └──600
+#      ┌──540
+#      │   └──476
+#      │       └──445
+#  ┌──410
+#  │   └──394
+# 381
+#  │     ┌──190
+#  │     │   └──146
+#  │  ┌──40
+#  │  │  └──35
+#  └──12
+#     └──9
+
+
 # 实现中序打印器
 class Printer_Inorder(Printer):
-    """按中序遍历顺序打印二叉树"""
     """
-    按中序遍历顺序打印二叉树。
-    
+    按中序遍历顺序打印二叉树
     类属性:
-    right_append - 表示节点右边线的字符串
-    left_append  - 表示节点左边线的字符串     
-    blank_append - 空白字符串     
-    line_append  - 节点内线的字符串      
+        right_append - 表示节点右边线的字符串
+        left_append  - 表示节点左边线的字符串     
+        blank_append - 空白字符串     
+        line_append  - 节点内线的字符串      
     """
     defaultLength: int = 2
     right_append = "┌" + StringTool.repeat("─", defaultLength)            
