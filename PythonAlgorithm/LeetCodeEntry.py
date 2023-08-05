@@ -4,16 +4,18 @@ import sys
 import os
 RootDirPath = os.path.abspath(os.path.dirname(os.getcwd())) + "/PythonAlgorithm"
 sys.path.append(RootDirPath)
-
-
-from Study.a线性表.a动态数组.StudyEntry001 import StudyEntry001
+from Utils.NQS_Utils import Utils
 
 
 
+# from Study.a线性表.a动态数组.StudyEntry001 import StudyEntry001
+
+
+@Utils.func_cal_time
 def main_study():
     try:
         print("\n\n\n--------程序开始执行---------\n\n")
-        StudyEntry001.run(execute=True)
+        
         
         
         
