@@ -1,5 +1,4 @@
 import collections
-from typing import Optional
 
 # https://leetcode.cn/problems/maximum-depth-of-binary-tree/
 """ 
@@ -19,16 +18,18 @@ from typing import Optional
 """
 
 # Definition for a binary tree node.
+
+
 class TreeNode(object):
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val=0, left: 'TreeNode' = None, right: 'TreeNode' = None):
         self.val = val
-        self.left = left
-        self.right = right
+        self.left: TreeNode = left
+        self.right: TreeNode = right
 
 
 class Solution(object):
-    # ---------方法一：深度优先搜索--------------
-    def maxDepth1(self, root: Optional[TreeNode]) -> int:
+    # ---------方法一：深度优先搜索DFS(Depth-First Search）--------------
+    def maxDepth1(self, root: TreeNode) -> int:
         if root is None:
             return 0
         else:
@@ -36,9 +37,9 @@ class Solution(object):
             rightHeight: int = self.maxDepth1(root=root.right)
             result: int = max(leftHeight, rightHeight) + 1
             return result
-    
-    # ---------方法二：广度优先搜索--------------
-    def maxDepth2(self, root: Optional[TreeNode]) -> int:
+
+    # ---------方法二：广度优先搜索BFS(Breadth-First Search)--------------
+    def maxDepth2(self, root: TreeNode) -> int:
 
         if root is None:
             return 0
@@ -46,7 +47,6 @@ class Solution(object):
         """
         TreeNode{val: 3, left: TreeNode{val: 9, left: None, right: None}, right: TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}}
         """
-        
 
         # 根据root节点，将整个树的所有节点添加进队列
         nodeQueue = collections.deque([root])
@@ -54,7 +54,7 @@ class Solution(object):
         """
         deque([TreeNode{val: 3, left: TreeNode{val: 9, left: None, right: None}, right: TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}}]) 
         """
-        
+
         resultDepth: int = 0
         while nodeQueue:
             # 获取当前总的节点数
@@ -62,26 +62,44 @@ class Solution(object):
             for i in range(size):
                 # 取出当前最新的子节点
                 tempNode: TreeNode = nodeQueue.popleft()
+                print(f"----{tempNode}")
+                print(f"***before****{nodeQueue}")
                 if tempNode.left is not None:
                     nodeQueue.append(tempNode.left)
                 if tempNode.right is not None:
                     nodeQueue.append(tempNode.right)
+                print(f"***after****{nodeQueue}")
             # 每次for循环都会消耗一层的节点，直到size为0时，就遍历到最深的叶子节点处了
             resultDepth += 1
             print("深度加1 \n")
         return resultDepth
 
+    """ 
+    ----TreeNode{val: 3, left: TreeNode{val: 9, left: None, right: None}, right: TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}}
+    ***before****deque([])
+    ***after****deque([TreeNode{val: 9, left: None, right: None}, TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}])
+    深度加1 
 
+    ----TreeNode{val: 9, left: None, right: None}
+    ***before****deque([TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}])
+    ***after****deque([TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}])
+    ----TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}
+    ***before****deque([])
+    ***after****deque([TreeNode{val: 15, left: None, right: None}, TreeNode{val: 7, left: None, right: None}])
+    深度加1 
+
+    ----TreeNode{val: 15, left: None, right: None}
+    ***before****deque([TreeNode{val: 7, left: None, right: None}])
+    ***after****deque([TreeNode{val: 7, left: None, right: None}])
+    ----TreeNode{val: 7, left: None, right: None}
+    ***before****deque([])
+    ***after****deque([])
+    深度加1 
+    """
 
 
 def run():
     print("")
 
+
 run()
-
-
-
-class _104_二叉树的最大深度(object):
-    @staticmethod
-    def run(self):
-        print("")
