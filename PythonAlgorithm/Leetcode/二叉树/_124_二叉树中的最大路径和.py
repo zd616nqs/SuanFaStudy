@@ -54,8 +54,3 @@ class Solution(object):
         dfs(root)
 
         return self.maxSum
-
-
-
-
-

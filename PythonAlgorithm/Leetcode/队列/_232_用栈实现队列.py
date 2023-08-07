@@ -47,14 +47,14 @@ class MyQueue:
 # param_4 = obj.empty()
 
 
-class _232_用栈实现队列(object):
-    @staticmethod
-    def run(self):
+
+def run(self):
+    queue: MyQueue = MyQueue()
+    queue.push(element=1)
+    queue.push(element=2)
+    queue.push(element=3)
+    print(f"{queue.peek()}")
+    print(f"{queue.pop()}")
+    print(f"{queue.empty()}")
         
-        queue: MyQueue = MyQueue()
-        queue.push(element=1)
-        queue.push(element=2)
-        queue.push(element=3)
-        print(f"{queue.peek()}")
-        print(f"{queue.pop()}")
-        print(f"{queue.empty()}")
+run()
