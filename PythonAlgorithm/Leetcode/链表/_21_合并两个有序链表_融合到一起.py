@@ -19,7 +19,46 @@ class ListNode(object):
 class Solution(object):
     
     def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
-        pass
+        # result: ListNode = self.mergeTwoLists1(list1, list2)
+        result: ListNode = self.mergeTwoLists2(list1, list2)
+        return result
+
+    # 方法一：递归，各种左右判断大小，递归调用
+    def mergeTwoLists1(self, list1: ListNode, list2: ListNode) -> ListNode:
+        if list1 is None:
+            return list2
+        elif list2 is None:
+            return list1
+        elif list1.val < list2.val:
+            list1.next = self.mergeTwoLists1(list1.next, list2)
+            return list1
+        else:
+            list2.next = self.mergeTwoLists1(list1, list2.next)
+            return list2
+
+    # 方法二：迭代的方式
+    def mergeTwoLists2(self, list1: ListNode, list2: ListNode) -> ListNode:
+        # 创建一个空节点
+        fakeHead: ListNode = ListNode(val=-1)
+        tempNode: ListNode = fakeHead
+
+        # 开始循环遍历
+        while (list1 and list2):
+            if list1.val <= list2.val:
+                tempNode.next = list1
+                list1 = list1.next
+            else:
+                tempNode.next = list2
+                list2 = list2.next
+                
+            # 每轮循环完后，自己next到下一个节点
+            tempNode = tempNode.next
+
+        # 合并后list1和list2 最多只有一个还未被合并完，直接将链表末尾指向未合并完的链表即可
+        tempNode.next = list2 if (list1 is None) else list1
+        
+        resutlHead: ListNode = fakeHead.next
+        return resutlHead
 
 
 def run():
