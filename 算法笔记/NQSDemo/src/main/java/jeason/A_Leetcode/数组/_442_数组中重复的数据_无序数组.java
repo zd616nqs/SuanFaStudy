@@ -1,7 +1,7 @@
 package jeason.A_Leetcode.数组;
 
 
-// https://leetcode-cn.com/problems/implement-queue-using-stacks/
+// https://leetcode.cn/problems/find-all-duplicates-in-an-array/
 
 import java.util.ArrayList;
 import java.util.List;
