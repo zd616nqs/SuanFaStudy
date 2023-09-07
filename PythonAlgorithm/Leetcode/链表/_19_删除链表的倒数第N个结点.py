@@ -67,7 +67,7 @@ class Solution(object):
         
         # 找到倒数第N+1个节点
         temp = fakeHeader
-        for _ in range(length - length):
+        for _ in range(length - n):
             temp = temp.next
         
         # 将倒数第n+1节点的next指向倒数n-1节点

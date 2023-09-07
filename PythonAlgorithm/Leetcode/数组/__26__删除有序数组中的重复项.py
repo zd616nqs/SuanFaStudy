@@ -23,23 +23,28 @@ class Solution(object):
         n: int = len(nums)
         if n == 0:
             return 0
-        # 初始位置：快指针index=1，慢指针index=0
+        
+        # 删除重复元素之后最少剩下一个元素
         fast: int = 1
-        slow: int = 0
+        slow: int = 1
         
         # 依次移动fast指针，直至最后一个节点
         while fast < n:
-            # 当前slow指针对应的值 != fast指针对应的值
-            # 1.慢指针向后挪1位
-            # 2.用来存储fast指针对应的值
-            if nums[fast] != nums[slow]:
-                slow += 1
+            # 说明nums[fast]跟之前的所有元素都不同
+            if nums[fast] != nums[fast - 1]:
                 nums[slow] = nums[fast]
-            # 3.存储完后，fast指针向后挪一位，继续下轮对比
+                slow += 1
+            # 存储完后，fast指针向后挪一位，继续下轮对比
             fast += 1
             
-        # 当前slow指针的下标就是最终数组的最大index，+1表示数组的容量
-        return slow + 1
+        # 删除后面多余的元素
+        diff: int = n - slow
+        for _ in range(0, diff):
+            nums.pop()
+        
+        # 从nums[0]到nums[slow−1]的每个元素都不相同
+        return slow
+    
         
 
 

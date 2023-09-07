@@ -34,13 +34,20 @@ class Solution(object):
         result: int = 0
         haveOdd: bool = False
         for temp in tempMap.keys():
+            # 取出所有字符对应出现的次数
             tempCount: int = tempMap[temp]
+            
             # 允许最多一个奇数的字符，放在最中间
             if (tempCount % 2) and not haveOdd:
                 result += 1
                 haveOdd = True
-            # 偶数时全部添加count，奇数时-1后再添加count
-            result += ((tempCount-1) if (tempCount % 2) else tempCount)
+            
+            if (tempCount % 2):
+                # 当前字符有奇数个，减1后再添加到总数里
+                result += (tempCount-1)
+            else:
+                # 当前字符有偶数个，直接把count添加到总数里
+                result += tempCount
         return result
 
 
