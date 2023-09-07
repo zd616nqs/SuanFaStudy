@@ -16,8 +16,12 @@
 题解：https://leetcode.cn/problems/linked-list-cycle/solutions/233220/141-linked-list-cycle_li-jie-by-gulugulu_go/
 """
 
-
 class ListNode(object):
+    def __init__(self, val: int, next):
+        self.val = val
+        self.next = next
+
+class ListNode2(object):
     def __init__(self, val: int = 0, next: 'ListNode' = None):
         self.val: int = val
         self.next: ListNode = next
